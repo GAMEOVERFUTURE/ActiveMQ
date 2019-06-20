@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd	
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+
+	<bean id="abstractDataSource" abstract="true" class="com.iapppay.operating.common.database.PayProxoolDataSource">
+		<property name="driver">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="prototypeCount">
+			<value>${jdbc.prototypeCount}</value>
+		</property>
+		<property name="maximumConnectionCount">
+			<value>${jdbc.maximumConnectionCount}</value>
+		</property>
+		<property name="minimumConnectionCount">
+			<value>${jdbc.minimumConnectionCount}</value>
+		</property>
+		<property name="maximumActiveTime">
+			<value>${jdbc.maximumActiveTime}</value>
+		</property>
+		<property name="maximumConnectionLifetime">
+			<value>${jdbc.maximumConnectionLifetime}</value>
+		</property>
+		<property name="houseKeepingSleepTime">
+			<value>${jdbc.houseKeepingSleepTime}</value>
+		</property>
+		<property name="simultaneousBuildThrottle">
+			<value>${jdbc.simultaneousBuildThrottle}</value>
+		</property>
+		<property name="testBeforeUse">
+			<value>${jdbc.testBeforeUse}</value>
+		</property>
+		<property name="testAfterUse">
+			<value>${jdbc.testAfterUse}</value>
+		</property>
+		<property name="trace">
+			<value>${jdbc.trace}</value>
+		</property>
+		<property name="verbose">
+			<value>${jdbc.verbose}</value>
+		</property>
+		<property name="houseKeepingTestSql" value="select CURRENT_DATE"></property>
+	</bean>
+	
+	<!-- manba start -->
+	<bean id="dataSource" parent="abstractDataSource">
+		<property name="driverUrl">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+		<property name="alias">
+			<value>${jdbc.alias}</value>
+		</property>
+	</bean>
+
+	<!-- 在服务器停止的时候，关闭所有数据库链接 -->
+	<bean id="dataSourceFacade" class="org.logicalcobwebs.proxool.ProxoolFacade"
+		destroy-method="shutdown" />
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="typeAliasesPackage" value="com.iapppay.consumer" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:/mapper/*.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 爱贝交易相关   start -->
+	<!-- 爱贝交易数据源 -->
+	<bean id="dataSource_op" parent="abstractDataSource">
+		<property name="driverUrl">
+			<value>${jdbc.op.url}</value>
+		</property>
+		<property name="user">
+			<value>${jdbc.op.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.op.password}</value>
+		</property>
+		<property name="alias">
+			<value>${jdbc.op.alias}</value>
+		</property>
+	</bean>
+	
+	<!-- 在服务器停止的时候，关闭所有数据库链接 -->
+	<bean id="dataSourceFacadeOp" class="org.logicalcobwebs.proxool.ProxoolFacade"
+		destroy-method="shutdown" />
+	
+	<bean id="sqlSessionFactory_op" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource_op" />
+		<property name="typeAliasesPackage" value="com.iapppay.operating"/>
+		<property name="mapperLocations">
+            <list>
+            	<value>classpath*:/mapper/op/*.xml</value>
+            </list>
+        </property>
+	</bean>
+	
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">  
+	    <!--指定要扫描包： 多个包用逗号隔开 -->  
+	    <property name="basePackage" value="com.iapppay.operating.model.op.dao" />
+	    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory_op"></property>
+	    <!--  只要Dao类前面加上@MyBatisRepository 这个自己指定的注解就可以扫描到 -->
+	    <property name="annotationClass" value="org.springframework.stereotype.Repository" />
+	</bean>
+
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--指定要扫描包： 多个包用逗号隔开 -->
+		<property name="basePackage" value="com.selfapp,com.iapppay.operating" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+		<!-- 只要Dao类前面加上@MyBatisRepository 这个自己指定的注解就可以扫描到 -->
+		<property name="annotationClass" value="org.springframework.stereotype.Repository" />
+	</bean>
+	
+	<!-- 事务管理器 -->
+    <bean id="txManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="txManagerOP"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource_op" />
+	</bean>
+
+	<!--启用注解事务驱动就可以 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+</beans>

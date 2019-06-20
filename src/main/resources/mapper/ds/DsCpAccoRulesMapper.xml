@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsCpAccoRulesMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsCpAccoRules">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cpid" jdbcType="INTEGER" property="cpid" />
+    <result column="startval" jdbcType="DECIMAL" property="startval" />
+    <result column="endval" jdbcType="DECIMAL" property="endval" />
+    <result column="cprate" jdbcType="DOUBLE" property="cprate" />
+    <result column="minfee" jdbcType="DOUBLE" property="minfee" />
+    <result column="maxfee" jdbcType="DOUBLE" property="maxfee" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    id, cpid, startval, endval, cprate, minfee, maxfee, remark
+  </sql>
+  
+  <sql id="batch_List">
+    cpid, startval, endval, cprate, minfee, maxfee, remark
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_cp_acco_rules
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  
+  <insert id="foreachInsert" parameterType="java.util.List">
+      INSERT INTO ds_cp_acco_rules(<include refid="batch_List"></include>)
+      VALUES
+      <foreach collection="list" item="rule" separator=",">
+          (#{rule.cpid,jdbcType=INTEGER}, #{rule.startval,jdbcType=DECIMAL}, 
+         #{rule.endval,jdbcType=DECIMAL}, #{rule.cprate,jdbcType=DOUBLE}, #{rule.minfee,jdbcType=DOUBLE}, 
+         #{rule.maxfee,jdbcType=DOUBLE}, #{rule.remark,jdbcType=VARCHAR})
+      </foreach>
+  </insert>
+
+   <delete id="foreachDelete">
+		delete from
+		ds_cp_acco_rules
+		where cpid IN
+		<foreach collection="list" item="rule" index="index" open="("
+			close=")" separator=",">
+			#{rule.cpid}
+		</foreach>
+   </delete>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_cp_acco_rules
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsCpAccoRules">
+    insert into ds_cp_acco_rules (id, cpid, startval, 
+      endval, cprate, minfee, 
+      maxfee, remark)
+    values (#{id,jdbcType=INTEGER}, #{cpid,jdbcType=INTEGER}, #{startval,jdbcType=DECIMAL}, 
+      #{endval,jdbcType=DECIMAL}, #{cprate,jdbcType=DOUBLE}, #{minfee,jdbcType=DOUBLE}, 
+      #{maxfee,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpAccoRules">
+    insert into ds_cp_acco_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="startval != null">
+        startval,
+      </if>
+      <if test="endval != null">
+        endval,
+      </if>
+      <if test="cprate != null">
+        cprate,
+      </if>
+      <if test="minfee != null">
+        minfee,
+      </if>
+      <if test="maxfee != null">
+        maxfee,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="startval != null">
+        #{startval,jdbcType=DECIMAL},
+      </if>
+      <if test="endval != null">
+        #{endval,jdbcType=DECIMAL},
+      </if>
+      <if test="cprate != null">
+        #{cprate,jdbcType=DOUBLE},
+      </if>
+      <if test="minfee != null">
+        #{minfee,jdbcType=DOUBLE},
+      </if>
+      <if test="maxfee != null">
+        #{maxfee,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpAccoRules">
+    update ds_cp_acco_rules
+    <set>
+      <if test="cpid != null">
+        cpid = #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="startval != null">
+        startval = #{startval,jdbcType=DECIMAL},
+      </if>
+      <if test="endval != null">
+        endval = #{endval,jdbcType=DECIMAL},
+      </if>
+      <if test="cprate != null">
+        cprate = #{cprate,jdbcType=DOUBLE},
+      </if>
+      <if test="minfee != null">
+        minfee = #{minfee,jdbcType=DOUBLE},
+      </if>
+      <if test="maxfee != null">
+        maxfee = #{maxfee,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpAccoRules">
+    update ds_cp_acco_rules
+    set cpid = #{cpid,jdbcType=INTEGER},
+      startval = #{startval,jdbcType=DECIMAL},
+      endval = #{endval,jdbcType=DECIMAL},
+      cprate = #{cprate,jdbcType=DOUBLE},
+      minfee = #{minfee,jdbcType=DOUBLE},
+      maxfee = #{maxfee,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

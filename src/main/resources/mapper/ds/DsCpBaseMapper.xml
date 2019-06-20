@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsCpBaseMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsCpBase">
+    <id column="cpid" jdbcType="INTEGER" property="cpid" />
+    <result column="cptype" jdbcType="INTEGER" property="cptype" />
+    <result column="cplevel" jdbcType="INTEGER" property="cplevel" />
+    <result column="cpstatus" jdbcType="CHAR" property="cpstatus" />
+    <result column="cpname" jdbcType="VARCHAR" property="cpname" />
+    <result column="regtime" jdbcType="TIMESTAMP" property="regtime" />
+    <result column="systemid" jdbcType="INTEGER" property="systemid" />
+    <result column="excpid" jdbcType="VARCHAR" property="excpid" />
+    <result column="iftest" jdbcType="INTEGER" property="iftest" />
+    <result column="cpunit" jdbcType="INTEGER" property="cpunit" />
+    <result column="industry_type" jdbcType="SMALLINT" property="industrytype" />
+    <result column="recstat" jdbcType="CHAR" property="recstat" />
+    <result column="platid" jdbcType="INTEGER" property="platid" />
+    <result column="parentcpid" jdbcType="INTEGER" property="parentcpid" />
+    <result column="bussinesstype" jdbcType="INTEGER" property="bussinesstype" />
+    <result column="balancecall" jdbcType="VARCHAR" property="balancecall" />
+    <result column="bindemail" jdbcType="VARCHAR" property="bindemail" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cpid, cptype, cplevel, cpstatus, cpname, regtime, systemid, excpid, iftest, cpunit, 
+    industry_type, recstat, platid, parentcpid, bussinesstype, balancecall, bindemail
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_cp_base
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_cp_base
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBase">
+    insert into ds_cp_base (cpid, cptype, cplevel, 
+      cpstatus, cpname, regtime, 
+      systemid, excpid, iftest, 
+      cpunit, industry_type, recstat, 
+      platid, parentcpid, bussinesstype, 
+      balancecall, bindemail)
+    values (#{cpid,jdbcType=INTEGER}, #{cptype,jdbcType=INTEGER}, #{cplevel,jdbcType=INTEGER}, 
+      #{cpstatus,jdbcType=CHAR}, #{cpname,jdbcType=VARCHAR}, #{regtime,jdbcType=TIMESTAMP}, 
+      #{systemid,jdbcType=INTEGER}, #{excpid,jdbcType=VARCHAR}, #{iftest,jdbcType=INTEGER}, 
+      #{cpunit,jdbcType=INTEGER}, #{industrytype}, #{recstat,jdbcType=CHAR}, 
+      #{platid,jdbcType=INTEGER}, #{parentcpid,jdbcType=INTEGER}, #{bussinesstype,jdbcType=INTEGER}, 
+      #{balancecall,jdbcType=VARCHAR}, #{bindemail,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBase">
+    insert into ds_cp_base
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="cptype != null">
+        cptype,
+      </if>
+      <if test="cplevel != null">
+        cplevel,
+      </if>
+      <if test="cpstatus != null">
+        cpstatus,
+      </if>
+      <if test="cpname != null">
+        cpname,
+      </if>
+      <if test="regtime != null">
+        regtime,
+      </if>
+      <if test="systemid != null">
+        systemid,
+      </if>
+      <if test="excpid != null">
+        excpid,
+      </if>
+      <if test="iftest != null">
+        iftest,
+      </if>
+      <if test="cpunit != null">
+        cpunit,
+      </if>
+      <if test="industrytype != null">
+        industry_type,
+      </if>
+      <if test="recstat != null">
+        recstat,
+      </if>
+      <if test="platid != null">
+        platid,
+      </if>
+      <if test="parentcpid != null">
+        parentcpid,
+      </if>
+      <if test="bussinesstype != null">
+        bussinesstype,
+      </if>
+      <if test="balancecall != null">
+        balancecall,
+      </if>
+      <if test="bindemail != null">
+        bindemail,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="cptype != null">
+        #{cptype,jdbcType=INTEGER},
+      </if>
+      <if test="cplevel != null">
+        #{cplevel,jdbcType=INTEGER},
+      </if>
+      <if test="cpstatus != null">
+        #{cpstatus,jdbcType=CHAR},
+      </if>
+      <if test="cpname != null">
+        #{cpname,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemid != null">
+        #{systemid,jdbcType=INTEGER},
+      </if>
+      <if test="excpid != null">
+        #{excpid,jdbcType=VARCHAR},
+      </if>
+      <if test="iftest != null">
+        #{iftest,jdbcType=INTEGER},
+      </if>
+      <if test="cpunit != null">
+        #{cpunit,jdbcType=INTEGER},
+      </if>
+      <if test="industrytype != null">
+        #{industrytype,jdbcType=SMALLINT},
+      </if>
+      <if test="recstat != null">
+        #{recstat,jdbcType=CHAR},
+      </if>
+      <if test="platid != null">
+        #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="parentcpid != null">
+        #{parentcpid,jdbcType=INTEGER},
+      </if>
+      <if test="bussinesstype != null">
+        #{bussinesstype,jdbcType=INTEGER},
+      </if>
+      <if test="balancecall != null">
+        #{balancecall,jdbcType=VARCHAR},
+      </if>
+      <if test="bindemail != null">
+        #{bindemail,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBase">
+    update ds_cp_base
+    <set>
+      <if test="cptype != null">
+        cptype = #{cptype,jdbcType=INTEGER},
+      </if>
+      <if test="cplevel != null">
+        cplevel = #{cplevel,jdbcType=INTEGER},
+      </if>
+      <if test="cpstatus != null">
+        cpstatus = #{cpstatus,jdbcType=CHAR},
+      </if>
+      <if test="cpname != null">
+        cpname = #{cpname,jdbcType=VARCHAR},
+      </if>
+      <if test="regtime != null">
+        regtime = #{regtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="systemid != null">
+        systemid = #{systemid,jdbcType=INTEGER},
+      </if>
+      <if test="excpid != null">
+        excpid = #{excpid,jdbcType=VARCHAR},
+      </if>
+      <if test="iftest != null">
+        iftest = #{iftest,jdbcType=INTEGER},
+      </if>
+      <if test="cpunit != null">
+        cpunit = #{cpunit,jdbcType=INTEGER},
+      </if>
+      <if test="industrytype != null">
+        industry_type = #{industrytype},
+      </if>
+      <if test="recstat != null">
+        recstat = #{recstat,jdbcType=CHAR},
+      </if>
+      <if test="platid != null">
+        platid = #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="parentcpid != null">
+        parentcpid = #{parentcpid,jdbcType=INTEGER},
+      </if>
+      <if test="bussinesstype != null">
+        bussinesstype = #{bussinesstype,jdbcType=INTEGER},
+      </if>
+      <if test="balancecall != null">
+        balancecall = #{balancecall,jdbcType=VARCHAR},
+      </if>
+      <if test="bindemail != null">
+        bindemail = #{bindemail,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBase">
+    update ds_cp_base
+    set cptype = #{cptype,jdbcType=INTEGER},
+      cplevel = #{cplevel,jdbcType=INTEGER},
+      cpstatus = #{cpstatus,jdbcType=CHAR},
+      cpname = #{cpname,jdbcType=VARCHAR},
+      regtime = #{regtime,jdbcType=TIMESTAMP},
+      systemid = #{systemid,jdbcType=INTEGER},
+      excpid = #{excpid,jdbcType=VARCHAR},
+      iftest = #{iftest,jdbcType=INTEGER},
+      cpunit = #{cpunit,jdbcType=INTEGER},
+      industry_type = #{industrytype},
+      recstat = #{recstat,jdbcType=CHAR},
+      platid = #{platid,jdbcType=INTEGER},
+      parentcpid = #{parentcpid,jdbcType=INTEGER},
+      bussinesstype = #{bussinesstype,jdbcType=INTEGER},
+      balancecall = #{balancecall,jdbcType=VARCHAR},
+      bindemail = #{bindemail,jdbcType=VARCHAR}
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+</mapper>

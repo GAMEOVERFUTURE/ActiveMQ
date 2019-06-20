@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsCpBankMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsCpBank">
+    <id column="cpid" jdbcType="INTEGER" property="cpid" />
+    <result column="bankname" jdbcType="VARCHAR" property="bankname" />
+    <result column="accountname" jdbcType="VARCHAR" property="accountname" />
+    <result column="accountid" jdbcType="VARCHAR" property="accountid" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    cpid, bankname, accountname, accountid
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_cp_bank
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_cp_bank
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBank">
+    insert into ds_cp_bank (cpid, bankname, accountname, 
+      accountid)
+    values (#{cpid,jdbcType=INTEGER}, #{bankname,jdbcType=VARCHAR}, #{accountname,jdbcType=VARCHAR}, 
+      #{accountid,jdbcType=VARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBank">
+    insert into ds_cp_bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="bankname != null">
+        bankname,
+      </if>
+      <if test="accountname != null">
+        accountname,
+      </if>
+      <if test="accountid != null">
+        accountid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="bankname != null">
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null">
+        #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountid != null">
+        #{accountid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBank">
+    update ds_cp_bank
+    <set>
+      <if test="bankname != null">
+        bankname = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountname != null">
+        accountname = #{accountname,jdbcType=VARCHAR},
+      </if>
+      <if test="accountid != null">
+        accountid = #{accountid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpBank">
+    update ds_cp_bank
+    set bankname = #{bankname,jdbcType=VARCHAR},
+      accountname = #{accountname,jdbcType=VARCHAR},
+      accountid = #{accountid,jdbcType=VARCHAR}
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+</mapper>

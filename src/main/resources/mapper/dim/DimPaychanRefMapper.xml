@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dimdao.DimPaychanRefMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dimdto.DimPaychanRef">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="paychannel" jdbcType="DOUBLE" property="paychannel" />
+    <result column="paychannelname" jdbcType="VARCHAR" property="paychannelname" />
+    <result column="channelaccountid" jdbcType="DOUBLE" property="channelaccountid" />
+    <result column="channelaccountname" jdbcType="VARCHAR" property="channelaccountname" />
+    <result column="merchantno" jdbcType="VARCHAR" property="merchantno" />
+    <result column="paytype" jdbcType="DOUBLE" property="paytype" />
+    <result column="paytypename" jdbcType="VARCHAR" property="paytypename" />
+    <result column="opchanno" jdbcType="DOUBLE" property="opchanno" />
+    <result column="opchanname" jdbcType="VARCHAR" property="opchanname" />
+    <result column="channo" jdbcType="DOUBLE" property="channo" />
+    <result column="ckchanno" jdbcType="DOUBLE" property="ckchanno" />
+    <result column="spchanno" jdbcType="DOUBLE" property="spchanno" />
+    <result column="spchanname" jdbcType="VARCHAR" property="spchanname" />
+    <result column="channamealias" jdbcType="VARCHAR" property="channamealias" />
+    <result column="spchannotype" jdbcType="DOUBLE" property="spchannotype" />
+    <result column="spchannorate" jdbcType="REAL" property="spchannorate" />
+    <result column="spchannolowerfee" jdbcType="DOUBLE" property="spchannolowerfee" />
+    <result column="rateextrule" jdbcType="VARCHAR" property="rateextrule" />
+    <result column="settleflag" jdbcType="DOUBLE" property="settleflag" />
+    <result column="settle_channel_id" jdbcType="DOUBLE" property="settlechannelid" />
+    <result column="settle_channel_name" jdbcType="VARCHAR" property="settlechannelname" />
+    <result column="settle_channel_type" jdbcType="INTEGER" property="settlechanneltype" />
+    <result column="isinvoice" jdbcType="BIT" property="isinvoice" />
+    <result column="sp_ability" jdbcType="INTEGER" property="spability" />
+    <result column="isroyalty" jdbcType="BIT" property="isroyalty" />
+    <result column="buschanrate" jdbcType="DOUBLE" property="buschanrate" />
+    <result column="inserttime" jdbcType="TIMESTAMP" property="inserttime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  
+  <resultMap type="com.iapppay.consumer.dto.dimdto.DimPaychanRef" id="CacheResult">
+     <id column="id" jdbcType="INTEGER" property="id" />
+     <result column="paytype" jdbcType="DOUBLE" property="paytype" />
+     <result column="paytypename" jdbcType="VARCHAR" property="paytypename" />
+     <result column="settle_channel_id" jdbcType="DOUBLE" property="settlechannelid" />
+     <result column="settle_channel_name" jdbcType="VARCHAR" property="settlechannelname" />
+  </resultMap>
+  
+   <sql id="Cache_Column_List">
+     id,paytype,paytypename,settle_channel_id,settle_channel_name
+   </sql>
+  
+  <sql id="Base_Column_List">
+    id, paychannel, paychannelname, channelaccountid, channelaccountname, merchantno, 
+    paytype, paytypename, opchanno, opchanname, channo, ckchanno, spchanno, spchanname, 
+    channamealias, spchannotype, spchannorate, spchannolowerfee, rateextrule, settleflag, 
+    settle_channel_id, settle_channel_name, settle_channel_type, isinvoice, sp_ability, 
+    isroyalty, buschanrate, inserttime, updatetime
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from dim_paychan_ref
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dim_paychan_ref
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dimdto.DimPaychanRef">
+    insert into dim_paychan_ref (id, paychannel, paychannelname, 
+      channelaccountid, channelaccountname, merchantno, 
+      paytype, paytypename, opchanno, 
+      opchanname, channo, ckchanno, 
+      spchanno, spchanname, channamealias, 
+      spchannotype, spchannorate, spchannolowerfee, 
+      rateextrule, settleflag, settle_channel_id, 
+      settle_channel_name, settle_channel_type, 
+      isinvoice, sp_ability, isroyalty, 
+      buschanrate, inserttime, updatetime
+      )
+    values (#{id,jdbcType=INTEGER}, #{paychannel,jdbcType=DOUBLE}, #{paychannelname,jdbcType=VARCHAR}, 
+      #{channelaccountid,jdbcType=DOUBLE}, #{channelaccountname,jdbcType=VARCHAR}, #{merchantno,jdbcType=VARCHAR}, 
+      #{paytype,jdbcType=DOUBLE}, #{paytypename,jdbcType=VARCHAR}, #{opchanno,jdbcType=DOUBLE}, 
+      #{opchanname,jdbcType=VARCHAR}, #{channo,jdbcType=DOUBLE}, #{ckchanno,jdbcType=DOUBLE}, 
+      #{spchanno,jdbcType=DOUBLE}, #{spchanname,jdbcType=VARCHAR}, #{channamealias,jdbcType=VARCHAR}, 
+      #{spchannotype,jdbcType=DOUBLE}, #{spchannorate,jdbcType=REAL}, #{spchannolowerfee,jdbcType=DOUBLE}, 
+      #{rateextrule,jdbcType=VARCHAR}, #{settleflag,jdbcType=DOUBLE}, #{settlechannelid,jdbcType=DOUBLE}, 
+      #{settlechannelname,jdbcType=VARCHAR}, #{settlechanneltype,jdbcType=INTEGER}, 
+      #{isinvoice,jdbcType=BIT}, #{spability,jdbcType=INTEGER}, #{isroyalty,jdbcType=BIT}, 
+      #{buschanrate,jdbcType=DOUBLE}, #{inserttime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dimdto.DimPaychanRef">
+    insert into dim_paychan_ref
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="paychannel != null">
+        paychannel,
+      </if>
+      <if test="paychannelname != null">
+        paychannelname,
+      </if>
+      <if test="channelaccountid != null">
+        channelaccountid,
+      </if>
+      <if test="channelaccountname != null">
+        channelaccountname,
+      </if>
+      <if test="merchantno != null">
+        merchantno,
+      </if>
+      <if test="paytype != null">
+        paytype,
+      </if>
+      <if test="paytypename != null">
+        paytypename,
+      </if>
+      <if test="opchanno != null">
+        opchanno,
+      </if>
+      <if test="opchanname != null">
+        opchanname,
+      </if>
+      <if test="channo != null">
+        channo,
+      </if>
+      <if test="ckchanno != null">
+        ckchanno,
+      </if>
+      <if test="spchanno != null">
+        spchanno,
+      </if>
+      <if test="spchanname != null">
+        spchanname,
+      </if>
+      <if test="channamealias != null">
+        channamealias,
+      </if>
+      <if test="spchannotype != null">
+        spchannotype,
+      </if>
+      <if test="spchannorate != null">
+        spchannorate,
+      </if>
+      <if test="spchannolowerfee != null">
+        spchannolowerfee,
+      </if>
+      <if test="rateextrule != null">
+        rateextrule,
+      </if>
+      <if test="settleflag != null">
+        settleflag,
+      </if>
+      <if test="settlechannelid != null">
+        settle_channel_id,
+      </if>
+      <if test="settlechannelname != null">
+        settle_channel_name,
+      </if>
+      <if test="settlechanneltype != null">
+        settle_channel_type,
+      </if>
+      <if test="isinvoice != null">
+        isinvoice,
+      </if>
+      <if test="spability != null">
+        sp_ability,
+      </if>
+      <if test="isroyalty != null">
+        isroyalty,
+      </if>
+      <if test="buschanrate != null">
+        buschanrate,
+      </if>
+      <if test="inserttime != null">
+        inserttime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="paychannel != null">
+        #{paychannel,jdbcType=DOUBLE},
+      </if>
+      <if test="paychannelname != null">
+        #{paychannelname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelaccountid != null">
+        #{channelaccountid,jdbcType=DOUBLE},
+      </if>
+      <if test="channelaccountname != null">
+        #{channelaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantno != null">
+        #{merchantno,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=DOUBLE},
+      </if>
+      <if test="paytypename != null">
+        #{paytypename,jdbcType=VARCHAR},
+      </if>
+      <if test="opchanno != null">
+        #{opchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="opchanname != null">
+        #{opchanname,jdbcType=VARCHAR},
+      </if>
+      <if test="channo != null">
+        #{channo,jdbcType=DOUBLE},
+      </if>
+      <if test="ckchanno != null">
+        #{ckchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="spchanno != null">
+        #{spchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="spchanname != null">
+        #{spchanname,jdbcType=VARCHAR},
+      </if>
+      <if test="channamealias != null">
+        #{channamealias,jdbcType=VARCHAR},
+      </if>
+      <if test="spchannotype != null">
+        #{spchannotype,jdbcType=DOUBLE},
+      </if>
+      <if test="spchannorate != null">
+        #{spchannorate,jdbcType=REAL},
+      </if>
+      <if test="spchannolowerfee != null">
+        #{spchannolowerfee,jdbcType=DOUBLE},
+      </if>
+      <if test="rateextrule != null">
+        #{rateextrule,jdbcType=VARCHAR},
+      </if>
+      <if test="settleflag != null">
+        #{settleflag,jdbcType=DOUBLE},
+      </if>
+      <if test="settlechannelid != null">
+        #{settlechannelid,jdbcType=DOUBLE},
+      </if>
+      <if test="settlechannelname != null">
+        #{settlechannelname,jdbcType=VARCHAR},
+      </if>
+      <if test="settlechanneltype != null">
+        #{settlechanneltype,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null">
+        #{isinvoice,jdbcType=BIT},
+      </if>
+      <if test="spability != null">
+        #{spability,jdbcType=INTEGER},
+      </if>
+      <if test="isroyalty != null">
+        #{isroyalty,jdbcType=BIT},
+      </if>
+      <if test="buschanrate != null">
+        #{buschanrate,jdbcType=DOUBLE},
+      </if>
+      <if test="inserttime != null">
+        #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dimdto.DimPaychanRef">
+    update dim_paychan_ref
+    <set>
+      <if test="paychannel != null">
+        paychannel = #{paychannel,jdbcType=DOUBLE},
+      </if>
+      <if test="paychannelname != null">
+        paychannelname = #{paychannelname,jdbcType=VARCHAR},
+      </if>
+      <if test="channelaccountid != null">
+        channelaccountid = #{channelaccountid,jdbcType=DOUBLE},
+      </if>
+      <if test="channelaccountname != null">
+        channelaccountname = #{channelaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantno != null">
+        merchantno = #{merchantno,jdbcType=VARCHAR},
+      </if>
+      <if test="paytype != null">
+        paytype = #{paytype,jdbcType=DOUBLE},
+      </if>
+      <if test="paytypename != null">
+        paytypename = #{paytypename,jdbcType=VARCHAR},
+      </if>
+      <if test="opchanno != null">
+        opchanno = #{opchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="opchanname != null">
+        opchanname = #{opchanname,jdbcType=VARCHAR},
+      </if>
+      <if test="channo != null">
+        channo = #{channo,jdbcType=DOUBLE},
+      </if>
+      <if test="ckchanno != null">
+        ckchanno = #{ckchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="spchanno != null">
+        spchanno = #{spchanno,jdbcType=DOUBLE},
+      </if>
+      <if test="spchanname != null">
+        spchanname = #{spchanname,jdbcType=VARCHAR},
+      </if>
+      <if test="channamealias != null">
+        channamealias = #{channamealias,jdbcType=VARCHAR},
+      </if>
+      <if test="spchannotype != null">
+        spchannotype = #{spchannotype,jdbcType=DOUBLE},
+      </if>
+      <if test="spchannorate != null">
+        spchannorate = #{spchannorate,jdbcType=REAL},
+      </if>
+      <if test="spchannolowerfee != null">
+        spchannolowerfee = #{spchannolowerfee,jdbcType=DOUBLE},
+      </if>
+      <if test="rateextrule != null">
+        rateextrule = #{rateextrule,jdbcType=VARCHAR},
+      </if>
+      <if test="settleflag != null">
+        settleflag = #{settleflag,jdbcType=DOUBLE},
+      </if>
+      <if test="settlechannel_id != null">
+        settle_channel_id = #{settlechannelid,jdbcType=DOUBLE},
+      </if>
+      <if test="settlechannelname != null">
+        settle_channel_name = #{settlechannelname,jdbcType=VARCHAR},
+      </if>
+      <if test="settlechanneltype != null">
+        settle_channel_type = #{settlechanneltype,jdbcType=INTEGER},
+      </if>
+      <if test="isinvoice != null">
+        isinvoice = #{isinvoice,jdbcType=BIT},
+      </if>
+      <if test="spability != null">
+        sp_ability = #{spability,jdbcType=INTEGER},
+      </if>
+      <if test="isroyalty != null">
+        isroyalty = #{isroyalty,jdbcType=BIT},
+      </if>
+      <if test="buschanrate != null">
+        buschanrate = #{buschanrate,jdbcType=DOUBLE},
+      </if>
+      <if test="inserttime != null">
+        inserttime = #{inserttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dimdto.DimPaychanRef">
+    update dim_paychan_ref
+    set paychannel = #{paychannel,jdbcType=DOUBLE},
+      paychannelname = #{paychannelname,jdbcType=VARCHAR},
+      channelaccountid = #{channelaccountid,jdbcType=DOUBLE},
+      channelaccountname = #{channelaccountname,jdbcType=VARCHAR},
+      merchantno = #{merchantno,jdbcType=VARCHAR},
+      paytype = #{paytype,jdbcType=DOUBLE},
+      paytypename = #{paytypename,jdbcType=VARCHAR},
+      opchanno = #{opchanno,jdbcType=DOUBLE},
+      opchanname = #{opchanname,jdbcType=VARCHAR},
+      channo = #{channo,jdbcType=DOUBLE},
+      ckchanno = #{ckchanno,jdbcType=DOUBLE},
+      spchanno = #{spchanno,jdbcType=DOUBLE},
+      spchanname = #{spchanname,jdbcType=VARCHAR},
+      channamealias = #{channamealias,jdbcType=VARCHAR},
+      spchannotype = #{spchannotype,jdbcType=DOUBLE},
+      spchannorate = #{spchannorate,jdbcType=REAL},
+      spchannolowerfee = #{spchannolowerfee,jdbcType=DOUBLE},
+      rateextrule = #{rateextrule,jdbcType=VARCHAR},
+      settleflag = #{settleflag,jdbcType=DOUBLE},
+      settle_channel_id = #{settlechannelid,jdbcType=DOUBLE},
+      settle_channel_name = #{settlechannelname,jdbcType=VARCHAR},
+      settle_channel_type = #{settlechanneltype,jdbcType=INTEGER},
+      isinvoice = #{isinvoice,jdbcType=BIT},
+      sp_ability = #{spability,jdbcType=INTEGER},
+      isroyalty = #{isroyalty,jdbcType=BIT},
+      buschanrate = #{buschanrate,jdbcType=DOUBLE},
+      inserttime = #{inserttime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="findAllDimPayChanRef" resultMap="CacheResult">
+     SELECT <include refid="Cache_Column_List"/>
+     FROM dim_paychan_ref
+  </select>
+</mapper>

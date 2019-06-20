@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms-4.1.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.12.1.xsd">
+	<context:component-scan base-package="com.iapppay.consumer" />
+	<!-- ActiveMQ 链接配置 -->
+	<bean id="amqConnectionFactory"
+		class="com.iapppay.consumer.IappayActiveMQConnectionFactory">
+		<property name="brokerURL">
+			<value>${activemq.broker.url}</value>
+		</property>
+		<property name="userName">
+			<value>${activemq.username}</value>
+		</property>
+		<property name="password">
+			<value>${activemq.password}</value>
+		</property>
+	</bean>
+
+	<!-- 配置连接池工厂 -->
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory"  destroy-method="stop">
+		<property name="connectionFactory" ref="amqConnectionFactory" />
+		<!-- 配置最大连接数 -->
+		<property name="maxConnections" value="${activemq.pool.maxConnections}" />
+	</bean>
+	
+	<!--使用缓存可以提升效率-->
+    <bean id="cachingConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+        <property name="targetConnectionFactory" ref="pooledConnectionFactory"/>
+        <property name="sessionCacheSize" value="100"/>
+    </bean>
+
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="messageConverter">
+            <bean class="org.springframework.jms.support.converter.SimpleMessageConverter"/>
+        </property>
+    </bean>
+
+	<!-- table的消息队列 -->
+	<bean id="destinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${activemq.queue.name}" />
+	</bean>
+	
+    <!-- 响应对列-->
+	<bean id="responsedestinationQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0" value="${activemq.response.queue.name}" />
+	</bean>
+	
+	<!--消息监听器-->
+    <bean id="spQueneMessageListener" class="com.iapppay.consumer.listener.SpQueneMessageListener">
+    </bean>
+    
+    <!--消息监听器-->
+    <bean id="spSessionMessageListener" class="com.iapppay.consumer.listener.SpSessionMessageListener">
+    </bean>
+	
+    <bean id="jmsContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="cachingConnectionFactory"/>
+        <property name="destination" ref="destinationQueue"/>
+        <property name="messageListener" ref="spSessionMessageListener"/>
+    </bean>
+
+
+
+</beans>

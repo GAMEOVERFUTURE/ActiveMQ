@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.AppDistRuleMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.AppDistRule">
+    <id column="appid" jdbcType="VARCHAR" property="appid" />
+    <id column="acid" jdbcType="INTEGER" property="acid" />
+    <id column="cpid" jdbcType="INTEGER" property="cpid" />
+    <id column="platid" jdbcType="INTEGER" property="platid" />
+    <result column="distrate" jdbcType="DOUBLE" property="distrate" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    appid, acid, cpid, platid, distrate, createtime
+  </sql>
+  
+  <!-- 批量插入规则 -->
+  <insert id="batchInsert" parameterType="java.util.List">
+    INSERT INTO bala_new_appdistrule_ds(<include refid="Base_Column_List"/>) VALUES
+    <foreach collection="list" item="rule" separator=",">
+    (#{rule.appid,jdbcType=VARCHAR}, #{rule.acid,jdbcType=INTEGER}, #{rule.cpid,jdbcType=INTEGER}, 
+      #{rule.platid,jdbcType=INTEGER}, #{rule.distrate,jdbcType=DOUBLE}, #{rule.createtime,jdbcType=TIMESTAMP}
+    )
+    </foreach>
+  </insert>
+
+  <select id="selectByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRuleKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bala_new_appdistrule_ds
+    where appid = #{appid,jdbcType=VARCHAR}
+      and acid = #{acid,jdbcType=INTEGER}
+      and cpid = #{cpid,jdbcType=INTEGER}
+      and platid = #{platid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRuleKey">
+    delete from bala_new_appdistrule_ds
+    where appid = #{appid,jdbcType=VARCHAR}
+      and acid = #{acid,jdbcType=INTEGER}
+      and cpid = #{cpid,jdbcType=INTEGER}
+      and platid = #{platid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRule">
+    insert into bala_new_appdistrule_ds (appid, acid, cpid, 
+      platid, distrate, createtime
+      )
+    values (#{appid,jdbcType=VARCHAR}, #{acid,jdbcType=INTEGER}, #{cpid,jdbcType=INTEGER}, 
+      #{platid,jdbcType=INTEGER}, #{distrate,jdbcType=DOUBLE}, #{createtime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRule">
+    insert into bala_new_appdistrule_ds
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="acid != null">
+        acid,
+      </if>
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="platid != null">
+        platid,
+      </if>
+      <if test="distrate != null">
+        distrate,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="acid != null">
+        #{acid,jdbcType=INTEGER},
+      </if>
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="platid != null">
+        #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="distrate != null">
+        #{distrate,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRule">
+    update bala_new_appdistrule_ds
+    <set>
+      <if test="distrate != null">
+        distrate = #{distrate,jdbcType=DOUBLE},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where appid = #{appid,jdbcType=VARCHAR}
+      and acid = #{acid,jdbcType=INTEGER}
+      and cpid = #{cpid,jdbcType=INTEGER}
+      and platid = #{platid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.AppDistRule">
+    update bala_new_appdistrule_ds
+    set distrate = #{distrate,jdbcType=DOUBLE},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where appid = #{appid,jdbcType=VARCHAR}
+      and acid = #{acid,jdbcType=INTEGER}
+      and cpid = #{cpid,jdbcType=INTEGER}
+      and platid = #{platid,jdbcType=INTEGER}
+  </update>
+  
+  <delete id="deleteRulesByParams" parameterType="java.util.Map">
+      DELETE FROM bala_new_appdistrule_ds
+      <where>
+      <if test="appid != null and appid !='' ">
+        appid = #{appid}
+      </if>
+      <if test="acid != null">
+        acid =#{acid}
+      </if>
+      <if test="cpid != null">
+        cpid =#{cpid}
+      </if>
+      </where> 
+  </delete>
+</mapper>

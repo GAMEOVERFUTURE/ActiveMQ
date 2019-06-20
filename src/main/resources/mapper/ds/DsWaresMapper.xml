@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsWaresMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsWares">
+    <id column="waresid" jdbcType="VARCHAR" property="waresid" />
+    <result column="waresname" jdbcType="VARCHAR" property="waresname" />
+    <result column="CPID" jdbcType="INTEGER" property="cpid" />
+    <result column="cpname" jdbcType="VARCHAR" property="cpname" />
+    <result column="APID" jdbcType="INTEGER" property="apid" />
+    <result column="platid" jdbcType="INTEGER" property="platid" />
+    <result column="apname" jdbcType="VARCHAR" property="apname" />
+    <result column="waresstatus" jdbcType="CHAR" property="waresstatus" />
+    <result column="via" jdbcType="INTEGER" property="via" />
+    <result column="lable" jdbcType="VARCHAR" property="lable" />
+    <result column="weresdesc" jdbcType="VARCHAR" property="weresdesc" />
+    <result column="thumb" jdbcType="VARCHAR" property="thumb" />
+    <result column="servphone" jdbcType="VARCHAR" property="servphone" />
+    <result column="grade" jdbcType="INTEGER" property="grade" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="onlinetime" jdbcType="DATE" property="onlinetime" />
+    <result column="offlinetime" jdbcType="DATE" property="offlinetime" />
+    <result column="lastupdtime" jdbcType="TIMESTAMP" property="lastupdtime" />
+    <result column="appkey" jdbcType="VARCHAR" property="appkey" />
+    <result column="appresppkey" jdbcType="VARCHAR" property="appresppkey" />
+    <result column="apprespvkey" jdbcType="VARCHAR" property="apprespvkey" />
+    <result column="appmodkey" jdbcType="VARCHAR" property="appmodkey" />
+    <result column="cacheflag" jdbcType="INTEGER" property="cacheflag" />
+    <result column="transsyncflag" jdbcType="INTEGER" property="transsyncflag" />
+    <result column="transsyncaddr" jdbcType="VARCHAR" property="transsyncaddr" />
+    <result column="syncrespflag" jdbcType="INTEGER" property="syncrespflag" />
+    <result column="transsyncver" jdbcType="INTEGER" property="transsyncver" />
+    <result column="priceversion" jdbcType="INTEGER" property="priceversion" />
+    <result column="ifunique" jdbcType="INTEGER" property="ifunique" />
+    <result column="commnum" jdbcType="INTEGER" property="commnum" />
+    <result column="plattype" jdbcType="VARCHAR" property="plattype" />
+    <result column="apptype" jdbcType="VARCHAR" property="apptype" />
+    <result column="appchildtype" jdbcType="VARCHAR" property="appchildtype" />
+    <result column="usefirstacid" jdbcType="INTEGER" property="usefirstacid" />
+    <result column="usefirstacid2" jdbcType="INTEGER" property="usefirstacid2" />
+    <result column="devicetype" jdbcType="CHAR" property="devicetype" />
+    <result column="rsaversion" jdbcType="INTEGER" property="rsaversion" />
+    <result column="cppkey" jdbcType="VARCHAR" property="cppkey" />
+    <result column="cpvkey" jdbcType="VARCHAR" property="cpvkey" />
+    <result column="platpkey" jdbcType="VARCHAR" property="platpkey" />
+    <result column="platvkey" jdbcType="VARCHAR" property="platvkey" />
+    <result column="groupid" jdbcType="INTEGER" property="groupid" />
+    <result column="appchinaappid" jdbcType="VARCHAR" property="appchinaappid" />
+    <result column="appchinaappkey" jdbcType="VARCHAR" property="appchinaappkey" />
+    <result column="appchinapackage" jdbcType="VARCHAR" property="appchinapackage" />
+    <result column="cusgroupid" jdbcType="INTEGER" property="cusgroupid" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    waresid, waresname, CPID, cpname, APID, platid, apname, waresstatus, via, lable, 
+    weresdesc, thumb, servphone, grade, createtime, onlinetime, offlinetime, lastupdtime, 
+    appkey, appresppkey, apprespvkey, appmodkey, cacheflag, transsyncflag, transsyncaddr, 
+    syncrespflag, transsyncver, priceversion, ifunique, commnum, plattype, apptype, appchildtype, 
+    usefirstacid, usefirstacid2, devicetype, rsaversion, cppkey, cpvkey, platpkey, platvkey, 
+    groupid, appchinaappid, appchinaappkey, appchinapackage, cusgroupid
+  </sql>
+  
+  <select id="getExistDsWares" parameterType="java.lang.String"  resultType="java.lang.Integer">
+    select count(1)
+    from ds_wares
+    where waresid = #{waresid,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_wares
+    where waresid = #{waresid,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ds_wares
+    where waresid = #{waresid,jdbcType=VARCHAR}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsWares">
+    insert into ds_wares (waresid, waresname, CPID, 
+      cpname, APID, platid, 
+      apname, waresstatus, via, 
+      lable, weresdesc, thumb, 
+      servphone, grade, createtime, 
+      onlinetime, offlinetime, lastupdtime, 
+      appkey, appresppkey, apprespvkey, 
+      appmodkey, cacheflag, transsyncflag, 
+      transsyncaddr, syncrespflag, transsyncver, 
+      priceversion, ifunique, commnum, 
+      plattype, apptype, appchildtype, 
+      usefirstacid, usefirstacid2, devicetype, 
+      rsaversion, cppkey, cpvkey, 
+      platpkey, platvkey, groupid, 
+      appchinaappid, appchinaappkey, appchinapackage, 
+      cusgroupid)
+    values (#{waresid,jdbcType=VARCHAR}, #{waresname,jdbcType=VARCHAR}, #{cpid,jdbcType=INTEGER}, 
+      #{cpname,jdbcType=VARCHAR}, #{apid,jdbcType=INTEGER}, #{platid,jdbcType=INTEGER}, 
+      #{apname,jdbcType=VARCHAR}, #{waresstatus,jdbcType=CHAR}, #{via,jdbcType=INTEGER}, 
+      #{lable,jdbcType=VARCHAR}, #{weresdesc,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, 
+      #{servphone,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{onlinetime,jdbcType=DATE}, #{offlinetime,jdbcType=DATE}, #{lastupdtime,jdbcType=TIMESTAMP}, 
+      #{appkey,jdbcType=VARCHAR}, #{appresppkey,jdbcType=VARCHAR}, #{apprespvkey,jdbcType=VARCHAR}, 
+      #{appmodkey,jdbcType=VARCHAR}, #{cacheflag,jdbcType=INTEGER}, #{transsyncflag,jdbcType=INTEGER}, 
+      #{transsyncaddr,jdbcType=VARCHAR}, #{syncrespflag,jdbcType=INTEGER}, #{transsyncver,jdbcType=INTEGER}, 
+      #{priceversion,jdbcType=INTEGER}, #{ifunique,jdbcType=INTEGER}, #{commnum,jdbcType=INTEGER}, 
+      #{plattype,jdbcType=VARCHAR}, #{apptype,jdbcType=VARCHAR}, #{appchildtype,jdbcType=VARCHAR}, 
+      #{usefirstacid,jdbcType=INTEGER}, #{usefirstacid2,jdbcType=INTEGER}, #{devicetype,jdbcType=CHAR}, 
+      #{rsaversion,jdbcType=INTEGER}, #{cppkey,jdbcType=VARCHAR}, #{cpvkey,jdbcType=VARCHAR}, 
+      #{platpkey,jdbcType=VARCHAR}, #{platvkey,jdbcType=VARCHAR}, #{groupid,jdbcType=INTEGER}, 
+      #{appchinaappid,jdbcType=VARCHAR}, #{appchinaappkey,jdbcType=VARCHAR}, #{appchinapackage,jdbcType=VARCHAR}, 
+      #{cusgroupid,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsWares">
+    insert into ds_wares
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="waresid != null">
+        waresid,
+      </if>
+      <if test="waresname != null">
+        waresname,
+      </if>
+      <if test="cpid != null">
+        CPID,
+      </if>
+      <if test="cpname != null">
+        cpname,
+      </if>
+      <if test="apid != null">
+        APID,
+      </if>
+      <if test="platid != null">
+        platid,
+      </if>
+      <if test="apname != null">
+        apname,
+      </if>
+      <if test="waresstatus != null">
+        waresstatus,
+      </if>
+      <if test="via != null">
+        via,
+      </if>
+      <if test="lable != null">
+        lable,
+      </if>
+      <if test="weresdesc != null">
+        weresdesc,
+      </if>
+      <if test="thumb != null">
+        thumb,
+      </if>
+      <if test="servphone != null">
+        servphone,
+      </if>
+      <if test="grade != null">
+        grade,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="onlinetime != null">
+        onlinetime,
+      </if>
+      <if test="offlinetime != null">
+        offlinetime,
+      </if>
+      <if test="lastupdtime != null">
+        lastupdtime,
+      </if>
+      <if test="appkey != null">
+        appkey,
+      </if>
+      <if test="appresppkey != null">
+        appresppkey,
+      </if>
+      <if test="apprespvkey != null">
+        apprespvkey,
+      </if>
+      <if test="appmodkey != null">
+        appmodkey,
+      </if>
+      <if test="cacheflag != null">
+        cacheflag,
+      </if>
+      <if test="transsyncflag != null">
+        transsyncflag,
+      </if>
+      <if test="transsyncaddr != null">
+        transsyncaddr,
+      </if>
+      <if test="syncrespflag != null">
+        syncrespflag,
+      </if>
+      <if test="transsyncver != null">
+        transsyncver,
+      </if>
+      <if test="priceversion != null">
+        priceversion,
+      </if>
+      <if test="ifunique != null">
+        ifunique,
+      </if>
+      <if test="commnum != null">
+        commnum,
+      </if>
+      <if test="plattype != null">
+        plattype,
+      </if>
+      <if test="apptype != null">
+        apptype,
+      </if>
+      <if test="appchildtype != null">
+        appchildtype,
+      </if>
+      <if test="usefirstacid != null">
+        usefirstacid,
+      </if>
+      <if test="usefirstacid2 != null">
+        usefirstacid2,
+      </if>
+      <if test="devicetype != null">
+        devicetype,
+      </if>
+      <if test="rsaversion != null">
+        rsaversion,
+      </if>
+      <if test="cppkey != null">
+        cppkey,
+      </if>
+      <if test="cpvkey != null">
+        cpvkey,
+      </if>
+      <if test="platpkey != null">
+        platpkey,
+      </if>
+      <if test="platvkey != null">
+        platvkey,
+      </if>
+      <if test="groupid != null">
+        groupid,
+      </if>
+      <if test="appchinaappid != null">
+        appchinaappid,
+      </if>
+      <if test="appchinaappkey != null">
+        appchinaappkey,
+      </if>
+      <if test="appchinapackage != null">
+        appchinapackage,
+      </if>
+      <if test="cusgroupid != null">
+        cusgroupid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="waresid != null">
+        #{waresid,jdbcType=VARCHAR},
+      </if>
+      <if test="waresname != null">
+        #{waresname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="cpname != null">
+        #{cpname,jdbcType=VARCHAR},
+      </if>
+      <if test="apid != null">
+        #{apid,jdbcType=INTEGER},
+      </if>
+      <if test="platid != null">
+        #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="apname != null">
+        #{apname,jdbcType=VARCHAR},
+      </if>
+      <if test="waresstatus != null">
+        #{waresstatus,jdbcType=CHAR},
+      </if>
+      <if test="via != null">
+        #{via,jdbcType=INTEGER},
+      </if>
+      <if test="lable != null">
+        #{lable,jdbcType=VARCHAR},
+      </if>
+      <if test="weresdesc != null">
+        #{weresdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="servphone != null">
+        #{servphone,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlinetime != null">
+        #{onlinetime,jdbcType=DATE},
+      </if>
+      <if test="offlinetime != null">
+        #{offlinetime,jdbcType=DATE},
+      </if>
+      <if test="lastupdtime != null">
+        #{lastupdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appkey != null">
+        #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appresppkey != null">
+        #{appresppkey,jdbcType=VARCHAR},
+      </if>
+      <if test="apprespvkey != null">
+        #{apprespvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appmodkey != null">
+        #{appmodkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cacheflag != null">
+        #{cacheflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncflag != null">
+        #{transsyncflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncaddr != null">
+        #{transsyncaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="syncrespflag != null">
+        #{syncrespflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncver != null">
+        #{transsyncver,jdbcType=INTEGER},
+      </if>
+      <if test="priceversion != null">
+        #{priceversion,jdbcType=INTEGER},
+      </if>
+      <if test="ifunique != null">
+        #{ifunique,jdbcType=INTEGER},
+      </if>
+      <if test="commnum != null">
+        #{commnum,jdbcType=INTEGER},
+      </if>
+      <if test="plattype != null">
+        #{plattype,jdbcType=VARCHAR},
+      </if>
+      <if test="apptype != null">
+        #{apptype,jdbcType=VARCHAR},
+      </if>
+      <if test="appchildtype != null">
+        #{appchildtype,jdbcType=VARCHAR},
+      </if>
+      <if test="usefirstacid != null">
+        #{usefirstacid,jdbcType=INTEGER},
+      </if>
+      <if test="usefirstacid2 != null">
+        #{usefirstacid2,jdbcType=INTEGER},
+      </if>
+      <if test="devicetype != null">
+        #{devicetype,jdbcType=CHAR},
+      </if>
+      <if test="rsaversion != null">
+        #{rsaversion,jdbcType=INTEGER},
+      </if>
+      <if test="cppkey != null">
+        #{cppkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cpvkey != null">
+        #{cpvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="platpkey != null">
+        #{platpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="platvkey != null">
+        #{platvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="appchinaappid != null">
+        #{appchinaappid,jdbcType=VARCHAR},
+      </if>
+      <if test="appchinaappkey != null">
+        #{appchinaappkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appchinapackage != null">
+        #{appchinapackage,jdbcType=VARCHAR},
+      </if>
+      <if test="cusgroupid != null">
+        #{cusgroupid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsWares">
+    update ds_wares
+    <set>
+      <if test="waresname != null">
+        waresname = #{waresname,jdbcType=VARCHAR},
+      </if>
+      <if test="cpid != null">
+        CPID = #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="cpname != null">
+        cpname = #{cpname,jdbcType=VARCHAR},
+      </if>
+      <if test="apid != null">
+        APID = #{apid,jdbcType=INTEGER},
+      </if>
+      <if test="platid != null">
+        platid = #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="apname != null">
+        apname = #{apname,jdbcType=VARCHAR},
+      </if>
+      <if test="waresstatus != null">
+        waresstatus = #{waresstatus,jdbcType=CHAR},
+      </if>
+      <if test="via != null">
+        via = #{via,jdbcType=INTEGER},
+      </if>
+      <if test="lable != null">
+        lable = #{lable,jdbcType=VARCHAR},
+      </if>
+      <if test="weresdesc != null">
+        weresdesc = #{weresdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="thumb != null">
+        thumb = #{thumb,jdbcType=VARCHAR},
+      </if>
+      <if test="servphone != null">
+        servphone = #{servphone,jdbcType=VARCHAR},
+      </if>
+      <if test="grade != null">
+        grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="onlinetime != null">
+        onlinetime = #{onlinetime,jdbcType=DATE},
+      </if>
+      <if test="offlinetime != null">
+        offlinetime = #{offlinetime,jdbcType=DATE},
+      </if>
+      <if test="lastupdtime != null">
+        lastupdtime = #{lastupdtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appkey != null">
+        appkey = #{appkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appresppkey != null">
+        appresppkey = #{appresppkey,jdbcType=VARCHAR},
+      </if>
+      <if test="apprespvkey != null">
+        apprespvkey = #{apprespvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appmodkey != null">
+        appmodkey = #{appmodkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cacheflag != null">
+        cacheflag = #{cacheflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncflag != null">
+        transsyncflag = #{transsyncflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncaddr != null">
+        transsyncaddr = #{transsyncaddr,jdbcType=VARCHAR},
+      </if>
+      <if test="syncrespflag != null">
+        syncrespflag = #{syncrespflag,jdbcType=INTEGER},
+      </if>
+      <if test="transsyncver != null">
+        transsyncver = #{transsyncver,jdbcType=INTEGER},
+      </if>
+      <if test="priceversion != null">
+        priceversion = #{priceversion,jdbcType=INTEGER},
+      </if>
+      <if test="ifunique != null">
+        ifunique = #{ifunique,jdbcType=INTEGER},
+      </if>
+      <if test="commnum != null">
+        commnum = #{commnum,jdbcType=INTEGER},
+      </if>
+      <if test="plattype != null">
+        plattype = #{plattype,jdbcType=VARCHAR},
+      </if>
+      <if test="apptype != null">
+        apptype = #{apptype,jdbcType=VARCHAR},
+      </if>
+      <if test="appchildtype != null">
+        appchildtype = #{appchildtype,jdbcType=VARCHAR},
+      </if>
+      <if test="usefirstacid != null">
+        usefirstacid = #{usefirstacid,jdbcType=INTEGER},
+      </if>
+      <if test="usefirstacid2 != null">
+        usefirstacid2 = #{usefirstacid2,jdbcType=INTEGER},
+      </if>
+      <if test="devicetype != null">
+        devicetype = #{devicetype,jdbcType=CHAR},
+      </if>
+      <if test="rsaversion != null">
+        rsaversion = #{rsaversion,jdbcType=INTEGER},
+      </if>
+      <if test="cppkey != null">
+        cppkey = #{cppkey,jdbcType=VARCHAR},
+      </if>
+      <if test="cpvkey != null">
+        cpvkey = #{cpvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="platpkey != null">
+        platpkey = #{platpkey,jdbcType=VARCHAR},
+      </if>
+      <if test="platvkey != null">
+        platvkey = #{platvkey,jdbcType=VARCHAR},
+      </if>
+      <if test="groupid != null">
+        groupid = #{groupid,jdbcType=INTEGER},
+      </if>
+      <if test="appchinaappid != null">
+        appchinaappid = #{appchinaappid,jdbcType=VARCHAR},
+      </if>
+      <if test="appchinaappkey != null">
+        appchinaappkey = #{appchinaappkey,jdbcType=VARCHAR},
+      </if>
+      <if test="appchinapackage != null">
+        appchinapackage = #{appchinapackage,jdbcType=VARCHAR},
+      </if>
+      <if test="cusgroupid != null">
+        cusgroupid = #{cusgroupid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where waresid = #{waresid,jdbcType=VARCHAR}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsWares">
+    update ds_wares
+    set waresname = #{waresname,jdbcType=VARCHAR},
+      CPID = #{cpid,jdbcType=INTEGER},
+      cpname = #{cpname,jdbcType=VARCHAR},
+      APID = #{apid,jdbcType=INTEGER},
+      platid = #{platid,jdbcType=INTEGER},
+      apname = #{apname,jdbcType=VARCHAR},
+      waresstatus = #{waresstatus,jdbcType=CHAR},
+      via = #{via,jdbcType=INTEGER},
+      lable = #{lable,jdbcType=VARCHAR},
+      weresdesc = #{weresdesc,jdbcType=VARCHAR},
+      thumb = #{thumb,jdbcType=VARCHAR},
+      servphone = #{servphone,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      onlinetime = #{onlinetime,jdbcType=DATE},
+      offlinetime = #{offlinetime,jdbcType=DATE},
+      lastupdtime = #{lastupdtime,jdbcType=TIMESTAMP},
+      appkey = #{appkey,jdbcType=VARCHAR},
+      appresppkey = #{appresppkey,jdbcType=VARCHAR},
+      apprespvkey = #{apprespvkey,jdbcType=VARCHAR},
+      appmodkey = #{appmodkey,jdbcType=VARCHAR},
+      cacheflag = #{cacheflag,jdbcType=INTEGER},
+      transsyncflag = #{transsyncflag,jdbcType=INTEGER},
+      transsyncaddr = #{transsyncaddr,jdbcType=VARCHAR},
+      syncrespflag = #{syncrespflag,jdbcType=INTEGER},
+      transsyncver = #{transsyncver,jdbcType=INTEGER},
+      priceversion = #{priceversion,jdbcType=INTEGER},
+      ifunique = #{ifunique,jdbcType=INTEGER},
+      commnum = #{commnum,jdbcType=INTEGER},
+      plattype = #{plattype,jdbcType=VARCHAR},
+      apptype = #{apptype,jdbcType=VARCHAR},
+      appchildtype = #{appchildtype,jdbcType=VARCHAR},
+      usefirstacid = #{usefirstacid,jdbcType=INTEGER},
+      usefirstacid2 = #{usefirstacid2,jdbcType=INTEGER},
+      devicetype = #{devicetype,jdbcType=CHAR},
+      rsaversion = #{rsaversion,jdbcType=INTEGER},
+      cppkey = #{cppkey,jdbcType=VARCHAR},
+      cpvkey = #{cpvkey,jdbcType=VARCHAR},
+      platpkey = #{platpkey,jdbcType=VARCHAR},
+      platvkey = #{platvkey,jdbcType=VARCHAR},
+      groupid = #{groupid,jdbcType=INTEGER},
+      appchinaappid = #{appchinaappid,jdbcType=VARCHAR},
+      appchinaappkey = #{appchinaappkey,jdbcType=VARCHAR},
+      appchinapackage = #{appchinapackage,jdbcType=VARCHAR},
+      cusgroupid = #{cusgroupid,jdbcType=INTEGER}
+    where waresid = #{waresid,jdbcType=VARCHAR}
+  </update>
+</mapper>

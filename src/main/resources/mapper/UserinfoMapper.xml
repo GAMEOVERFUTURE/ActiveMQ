@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.UserinfoMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.framework.entity.request.Userinfo">
+    <id column="userid" jdbcType="INTEGER" property="userid" />
+    <result column="loginname" jdbcType="VARCHAR" property="loginname" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    userid, loginname, password, status,username
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where userid = #{userid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from userinfo
+    where userid = #{userid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.iapppay.consumer.framework.entity.request.Userinfo">
+    insert into userinfo (userid, loginname, password, 
+      status,username)
+    values (#{userid,jdbcType=INTEGER}, #{loginname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR},#{username})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.framework.entity.request.Userinfo">
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        userid,
+      </if>
+      <if test="loginname != null">
+        loginname,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="loginname != null">
+        #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.framework.entity.request.Userinfo">
+    update userinfo
+    <set>
+      <if test="loginname != null">
+        loginname = #{loginname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+    </set>
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.framework.entity.request.Userinfo">
+    update userinfo
+    set loginname = #{loginname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      status = #{status,jdbcType=CHAR}
+    where userid = #{userid,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectByName" resultMap="BaseResultMap">
+     select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where status='A' and loginname = #{loginname,jdbcType=VARCHAR} 
+  </select>
+</mapper>

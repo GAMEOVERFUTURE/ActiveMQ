@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dimdao.YqzlCpPayInfoMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfo">
+    <id column="cp_id" jdbcType="INTEGER" property="cpid" />
+    <id column="plat_id" jdbcType="INTEGER" property="platid" />
+    <result column="rcv_account" jdbcType="VARCHAR" property="rcvaccount" />
+    <result column="rcv_account_name" jdbcType="VARCHAR" property="rcvaccountname" />
+    <result column="rcv_open_bank" jdbcType="VARCHAR" property="rcvopenbank" />
+    <result column="bank_flag" jdbcType="VARCHAR" property="bankflag" />
+    <result column="area_flag" jdbcType="VARCHAR" property="areaflag" />
+    <result column="update_by" jdbcType="INTEGER" property="updateby" />
+    <result column="last_update_time" jdbcType="TIMESTAMP" property="lastupdatetime" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    cp_id, plat_id, rcv_account, rcv_account_name, rcv_open_bank, bank_flag, area_flag, 
+    update_by, last_update_time
+  </sql>
+  
+  <select id="selectByPrimaryKey" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfoKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from yqzl_cp_pay_info
+    where cp_id = #{cpid,jdbcType=INTEGER}
+      and plat_id = #{platid,jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfoKey">
+    delete from yqzl_cp_pay_info
+    where cp_id = #{cpid,jdbcType=INTEGER}
+      and plat_id = #{platid,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfo">
+    insert into yqzl_cp_pay_info (cp_id, plat_id, rcv_account, 
+      rcv_account_name, rcv_open_bank, bank_flag, 
+      area_flag, update_by, last_update_time
+      )
+    values (#{cpid,jdbcType=INTEGER}, #{platid,jdbcType=INTEGER}, #{rcvaccount,jdbcType=VARCHAR}, 
+      #{rcvaccountname,jdbcType=VARCHAR}, #{rcvopenbank,jdbcType=VARCHAR}, #{bankflag,jdbcType=VARCHAR}, 
+      #{areaflag,jdbcType=VARCHAR}, #{updateby,jdbcType=INTEGER}, #{lastupdatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfo">
+    insert into yqzl_cp_pay_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        cp_id,
+      </if>
+      <if test="platid != null">
+        plat_id,
+      </if>
+      <if test="rcvaccount != null">
+        rcv_account,
+      </if>
+      <if test="rcvaccountname != null">
+        rcv_account_name,
+      </if>
+      <if test="rcvopenbank != null">
+        rcv_open_bank,
+      </if>
+      <if test="bankflag != null">
+        bank_flag,
+      </if>
+      <if test="areaflag != null">
+        area_flag,
+      </if>
+      <if test="updateby != null">
+        update_by,
+      </if>
+      <if test="lastupdatetime != null">
+        last_update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="platid != null">
+        #{platid,jdbcType=INTEGER},
+      </if>
+      <if test="rcvaccount != null">
+        #{rcvaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvaccountname != null">
+        #{rcvaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvopenbank != null">
+        #{rcvopenbank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankflag != null">
+        #{bankflag,jdbcType=VARCHAR},
+      </if>
+      <if test="areaflag != null">
+        #{areaflag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        #{updateby,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null">
+        #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfo">
+    update yqzl_cp_pay_info
+    <set>
+      <if test="rcvaccount != null">
+        rcv_account = #{rcvaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvaccountname != null">
+        rcv_account_name = #{rcvaccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvopenbank != null">
+        rcv_open_bank = #{rcvopenbank,jdbcType=VARCHAR},
+      </if>
+      <if test="bankflag != null">
+        bank_flag = #{bankflag,jdbcType=VARCHAR},
+      </if>
+      <if test="areaflag != null">
+        area_flag = #{areaflag,jdbcType=VARCHAR},
+      </if>
+      <if test="updateby != null">
+        update_by = #{updateby,jdbcType=INTEGER},
+      </if>
+      <if test="lastupdatetime != null">
+        last_update_time = #{lastupdatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where cp_id = #{cpid,jdbcType=INTEGER}
+      and plat_id = #{platid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dimdto.YqzlCpPayInfo">
+    update yqzl_cp_pay_info
+    set rcv_account = #{rcvaccount,jdbcType=VARCHAR},
+      rcv_account_name = #{rcvaccountname,jdbcType=VARCHAR},
+      rcv_open_bank = #{rcvopenbank,jdbcType=VARCHAR},
+      bank_flag = #{bankflag,jdbcType=VARCHAR},
+      area_flag = #{areaflag,jdbcType=VARCHAR},
+      update_by = #{updateby,jdbcType=INTEGER},
+      last_update_time = #{lastupdatetime,jdbcType=TIMESTAMP}
+    where cp_id = #{cpid,jdbcType=INTEGER}
+      and plat_id = #{platid,jdbcType=INTEGER}
+  </update>
+</mapper>

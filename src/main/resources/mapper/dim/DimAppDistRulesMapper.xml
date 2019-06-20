@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dimdao.DimAppDistRulesMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dimdto.DimAppDistRules">
+    <id column="ruleid" jdbcType="INTEGER" property="ruleid" />
+    <result column="appid" jdbcType="VARCHAR" property="appid" />
+    <result column="acid" jdbcType="INTEGER" property="acid" />
+    <result column="cpid" jdbcType="INTEGER" property="cpid" />
+    <result column="distrate" jdbcType="DECIMAL" property="distrate" />
+    <result column="status" jdbcType="CHAR" property="status" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    ruleid, appid, acid, cpid, distrate, status, createtime
+  </sql>
+  
+  <sql id="NoId_Column_List">
+    appid, acid, cpid, distrate, status, createtime
+  </sql>
+
+  <!-- 批量插入规则 -->
+  <insert id="batchInsert" useGeneratedKeys="true" keyProperty="ruleid" parameterType="java.util.List">
+    INSERT INTO bala_app_share_profit_rules(<include refid="NoId_Column_List"/>) VALUES
+    <foreach collection="list" item="rule"  index="index" separator=",">
+    (#{rule.appid,jdbcType=VARCHAR}, #{rule.acid,jdbcType=INTEGER},
+     #{rule.cpid,jdbcType=INTEGER}, #{rule.distrate,jdbcType=DECIMAL},
+     #{rule.status,jdbcType=CHAR}, #{rule.createtime,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bala_app_share_profit_rules 
+    where ruleid = #{ruleid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bala_app_share_profit_rules
+    where ruleid = #{ruleid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dimdto.DimAppDistRules">
+    insert into bala_app_share_profit_rules (ruleid, appid, acid, 
+      cpid, distrate,status, createtime)
+    values (#{ruleid,jdbcType=INTEGER}, #{appid,jdbcType=VARCHAR}, #{acid,jdbcType=INTEGER}, 
+      #{cpid,jdbcType=INTEGER}, #{distrate,jdbcType=DECIMAL}, 
+      #{status,jdbcType=CHAR}, #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dimdto.DimAppDistRules">
+    insert into bala_app_share_profit_rules
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ruleid != null">
+        ruleid,
+      </if>
+      <if test="appid != null">
+        appid,
+      </if>
+      <if test="acid != null">
+        acid,
+      </if>
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="distrate != null">
+        distrate,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ruleid != null">
+        #{ruleid,jdbcType=INTEGER},
+      </if>
+      <if test="appid != null">
+        #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="acid != null">
+        #{acid,jdbcType=INTEGER},
+      </if>
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="distrate != null">
+        #{distrate},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dimdto.DimAppDistRules">
+    update bala_app_share_profit_rules
+    <set>
+      <if test="appid != null">
+        appid = #{appid,jdbcType=VARCHAR},
+      </if>
+      <if test="acid != null">
+        acid = #{acid,jdbcType=INTEGER},
+      </if>
+      <if test="cpid != null">
+        cpid = #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="distrate != null">
+        distrate = #{distrate},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=CHAR},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ruleid = #{ruleid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dimdto.DimAppDistRules">
+    update bala_app_share_profit_rules
+    set appid = #{appid,jdbcType=VARCHAR},
+      acid = #{acid,jdbcType=INTEGER},
+      cpid = #{cpid,jdbcType=INTEGER},
+      distrate = #{distrate},
+      status = #{status,jdbcType=CHAR},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where ruleid = #{ruleid,jdbcType=INTEGER}
+  </update>
+  
+  <update id="updateShateProfitStatus" parameterType="java.util.Map">
+    update bala_app_share_profit_rules
+    set status = 'N'
+    where appid = #{appid} and status = 'Y'
+  </update>
+</mapper>

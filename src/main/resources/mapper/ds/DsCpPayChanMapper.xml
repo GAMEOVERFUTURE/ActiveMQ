@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsCpPayChanMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsCpPayChan">
+    <id column="cpid" jdbcType="INTEGER" property="cpid" />
+    <id column="platchanno" jdbcType="INTEGER" property="platchanno" />
+    <result column="chanrate" jdbcType="DOUBLE" property="chanrate" />
+    <result column="balacyc" jdbcType="CHAR" property="balacyc" />
+    <result column="minfee" jdbcType="DOUBLE" property="minfee" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="isenable" jdbcType="CHAR" property="isenable" />
+    <result column="paytype" jdbcType="INTEGER" property="paytype" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cpid, platchanno, chanrate, balacyc, minfee, remark, isenable, paytype
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChanKey" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_cp_paychan
+    where cpid = #{cpid,jdbcType=INTEGER}
+      and platchanno = #{platchanno,jdbcType=INTEGER}
+  </select>
+  
+  <insert id="foreachInsert" parameterType="java.util.List">
+      INSERT INTO ds_cp_paychan(<include refid="Base_Column_List"></include>)
+      VALUES
+      <foreach collection="list" item="paychan" separator=",">
+          (#{paychan.cpid,jdbcType=INTEGER}, #{paychan.platchanno,jdbcType=INTEGER}, #{paychan.chanrate,jdbcType=DOUBLE}, 
+          #{paychan.balacyc,jdbcType=CHAR}, #{paychan.minfee,jdbcType=DOUBLE}, #{paychan.remark,jdbcType=VARCHAR}, 
+          #{paychan.isenable,jdbcType=CHAR}, #{paychan.paytype,jdbcType=INTEGER})
+      </foreach>
+  </insert>
+
+   <delete id="foreachDelete">
+	delete from
+	ds_cp_paychan
+	where cpid IN
+	<foreach collection="list" item="paychan" index="index" open="("
+		close=")" separator=",">
+		#{paychan.cpid}
+	</foreach>
+   </delete>
+
+  <delete id="deleteByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChanKey">
+    delete from ds_cp_paychan
+    where cpid = #{cpid,jdbcType=INTEGER}
+      and platchanno = #{platchanno,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChan">
+    insert into ds_cp_paychan (cpid, platchanno, chanrate, 
+      balacyc, minfee, remark, 
+      isenable, paytype)
+    values (#{cpid,jdbcType=INTEGER}, #{platchanno,jdbcType=INTEGER}, #{chanrate,jdbcType=DOUBLE}, 
+      #{balacyc,jdbcType=CHAR}, #{minfee,jdbcType=DOUBLE}, #{remark,jdbcType=VARCHAR}, 
+      #{isenable,jdbcType=CHAR}, #{paytype,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChan">
+    insert into ds_cp_paychan
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="platchanno != null">
+        platchanno,
+      </if>
+      <if test="chanrate != null">
+        chanrate,
+      </if>
+      <if test="balacyc != null">
+        balacyc,
+      </if>
+      <if test="minfee != null">
+        minfee,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="isenable != null">
+        isenable,
+      </if>
+      <if test="paytype != null">
+        paytype,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="platchanno != null">
+        #{platchanno,jdbcType=INTEGER},
+      </if>
+      <if test="chanrate != null">
+        #{chanrate,jdbcType=DOUBLE},
+      </if>
+      <if test="balacyc != null">
+        #{balacyc,jdbcType=CHAR},
+      </if>
+      <if test="minfee != null">
+        #{minfee,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        #{isenable,jdbcType=CHAR},
+      </if>
+      <if test="paytype != null">
+        #{paytype,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChan">
+    update ds_cp_paychan
+    <set>
+      <if test="chanrate != null">
+        chanrate = #{chanrate,jdbcType=DOUBLE},
+      </if>
+      <if test="balacyc != null">
+        balacyc = #{balacyc,jdbcType=CHAR},
+      </if>
+      <if test="minfee != null">
+        minfee = #{minfee,jdbcType=DOUBLE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isenable != null">
+        isenable = #{isenable,jdbcType=CHAR},
+      </if>
+      <if test="paytype != null">
+        paytype = #{paytype,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cpid = #{cpid,jdbcType=INTEGER}
+      and platchanno = #{platchanno,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpPayChan">
+    update ds_cp_paychan
+    set chanrate = #{chanrate,jdbcType=DOUBLE},
+      balacyc = #{balacyc,jdbcType=CHAR},
+      minfee = #{minfee,jdbcType=DOUBLE},
+      remark = #{remark,jdbcType=VARCHAR},
+      isenable = #{isenable,jdbcType=CHAR},
+      paytype = #{paytype,jdbcType=INTEGER}
+    where cpid = #{cpid,jdbcType=INTEGER}
+      and platchanno = #{platchanno,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iapppay.consumer.dao.dsdao.DsCpContractMapper">
+  <resultMap id="BaseResultMap" type="com.iapppay.consumer.dto.dsdto.DsCpContract">
+    <id column="cpid" jdbcType="INTEGER" property="cpid" />
+    <result column="contbegtime" jdbcType="CHAR" property="contbegtime" />
+    <result column="contendtime" jdbcType="CHAR" property="contendtime" />
+    <result column="isautorene" jdbcType="CHAR" property="isautorene" />
+    <result column="departid" jdbcType="CHAR" property="departid" />
+    <result column="workerid" jdbcType="CHAR" property="workerid" />
+    <result column="servtype" jdbcType="CHAR" property="servtype" />
+    <result column="balacyctype" jdbcType="CHAR" property="balacyctype" />
+    <result column="balacyctype_time" jdbcType="DATE" property="balacyctypetime" />
+    <result column="balacyctype_value" jdbcType="INTEGER" property="balacyctypevalue" />
+    <result column="balacyctyp_time" jdbcType="DATE" property="balacyctyptime" />
+    <result column="balacyctyp_value" jdbcType="INTEGER" property="balacyctypvalue" />
+    <result column="lowpaymoney" jdbcType="DOUBLE" property="lowpaymoney" />
+    <result column="feecontr" jdbcType="CHAR" property="feecontr" />
+    <result column="freebegtime" jdbcType="CHAR" property="freebegtime" />
+    <result column="freeendtime" jdbcType="CHAR" property="freeendtime" />
+    <result column="recdate" jdbcType="DATE" property="recdate" />
+    <result column="upddate" jdbcType="DATE" property="upddate" />
+    <result column="montranflow" jdbcType="DOUBLE" property="montranflow" />
+    <result column="transfercpid" jdbcType="INTEGER" property="transfercpid" />
+    <result column="transfercpname" jdbcType="VARCHAR" property="transfercpname" />
+    <result column="transfertime" jdbcType="CHAR" property="transfertime" />
+    <result column="transfernote" jdbcType="VARCHAR" property="transfernote" />
+    <result column="istransfer" jdbcType="INTEGER" property="istransfer" />
+    <result column="ratetemplate" jdbcType="VARCHAR" property="ratetemplate" />
+    <result column="iselecontract" jdbcType="INTEGER" property="iselecontract" />
+    <result column="effectivetime" jdbcType="CHAR" property="effectivetime" />
+    <result column="formaltime" jdbcType="CHAR" property="formaltime" />
+    <result column="contraaudistatus" jdbcType="INTEGER" property="contraaudistatus" />
+    <result column="contratype" jdbcType="INTEGER" property="contratype" />
+    <result column="cpmode" jdbcType="VARCHAR" property="cpmode" />
+    <result column="agent_company_code" jdbcType="VARCHAR" property="agentcompanycode" />
+    <result column="refund_rule" jdbcType="INTEGER" property="refundrule" />
+    <result column="audit_effect" jdbcType="INTEGER" property="auditeffect" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    cpid, contbegtime, contendtime, isautorene, departid, workerid, servtype, balacyctype, 
+    balacyctype_time, balacyctype_value, balacyctyp_time, balacyctyp_value, lowpaymoney, 
+    feecontr, freebegtime, freeendtime, recdate, upddate, montranflow, transfercpid, 
+    transfercpname, transfertime, transfernote, istransfer, ratetemplate, iselecontract, 
+    effectivetime, formaltime, contraaudistatus, contratype, cpmode, agent_company_code, 
+    refund_rule, audit_effect
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ds_cp_contract
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_cp_contract
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.iapppay.consumer.dto.dsdto.DsCpContract">
+    insert into ds_cp_contract (cpid, contbegtime, contendtime, 
+      isautorene, departid, workerid, 
+      servtype, balacyctype, balacyctype_time, 
+      balacyctype_value, balacyctyp_time, balacyctyp_value, 
+      lowpaymoney, feecontr, freebegtime, 
+      freeendtime, recdate, upddate, 
+      montranflow, transfercpid, transfercpname, 
+      transfertime, transfernote, istransfer, 
+      ratetemplate, iselecontract, effectivetime, 
+      formaltime, contraaudistatus, contratype, 
+      cpmode, agent_company_code, refund_rule, 
+      audit_effect)
+    values (#{cpid,jdbcType=INTEGER}, #{contbegtime,jdbcType=CHAR}, #{contendtime,jdbcType=CHAR}, 
+      #{isautorene,jdbcType=CHAR}, #{departid,jdbcType=CHAR}, #{workerid,jdbcType=CHAR}, 
+      #{servtype,jdbcType=CHAR}, #{balacyctype,jdbcType=CHAR}, #{balacyctypetime,jdbcType=DATE}, 
+      #{balacyctypevalue,jdbcType=INTEGER}, #{balacyctyptime,jdbcType=DATE}, #{balacyctypvalue,jdbcType=INTEGER}, 
+      #{lowpaymoney,jdbcType=DOUBLE}, #{feecontr,jdbcType=CHAR}, #{freebegtime,jdbcType=CHAR}, 
+      #{freeendtime,jdbcType=CHAR}, #{recdate,jdbcType=DATE}, #{upddate,jdbcType=DATE}, 
+      #{montranflow,jdbcType=DOUBLE}, #{transfercpid,jdbcType=INTEGER}, #{transfercpname,jdbcType=VARCHAR}, 
+      #{transfertime,jdbcType=CHAR}, #{transfernote,jdbcType=VARCHAR}, #{istransfer,jdbcType=INTEGER}, 
+      #{ratetemplate,jdbcType=VARCHAR}, #{iselecontract,jdbcType=INTEGER}, #{effectivetime,jdbcType=CHAR}, 
+      #{formaltime,jdbcType=CHAR}, #{contraaudistatus,jdbcType=INTEGER}, #{contratype,jdbcType=INTEGER}, 
+      #{cpmode,jdbcType=VARCHAR}, #{agentcompanycode,jdbcType=VARCHAR}, #{refundrule,jdbcType=INTEGER}, 
+      #{auditeffect,jdbcType=INTEGER})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpContract">
+    insert into ds_cp_contract
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        cpid,
+      </if>
+      <if test="contbegtime != null">
+        contbegtime,
+      </if>
+      <if test="contendtime != null">
+        contendtime,
+      </if>
+      <if test="isautorene != null">
+        isautorene,
+      </if>
+      <if test="departid != null">
+        departid,
+      </if>
+      <if test="workerid != null">
+        workerid,
+      </if>
+      <if test="servtype != null">
+        servtype,
+      </if>
+      <if test="balacyctype != null">
+        balacyctype,
+      </if>
+      <if test="balacyctypetime != null">
+        balacyctype_time,
+      </if>
+      <if test="balacyctypevalue != null">
+        balacyctype_value,
+      </if>
+      <if test="balacyctyptime != null">
+        balacyctyp_time,
+      </if>
+      <if test="balacyctypvalue != null">
+        balacyctyp_value,
+      </if>
+      <if test="lowpaymoney != null">
+        lowpaymoney,
+      </if>
+      <if test="feecontr != null">
+        feecontr,
+      </if>
+      <if test="freebegtime != null">
+        freebegtime,
+      </if>
+      <if test="freeendtime != null">
+        freeendtime,
+      </if>
+      <if test="recdate != null">
+        recdate,
+      </if>
+      <if test="upddate != null">
+        upddate,
+      </if>
+      <if test="montranflow != null">
+        montranflow,
+      </if>
+      <if test="transfercpid != null">
+        transfercpid,
+      </if>
+      <if test="transfercpname != null">
+        transfercpname,
+      </if>
+      <if test="transfertime != null">
+        transfertime,
+      </if>
+      <if test="transfernote != null">
+        transfernote,
+      </if>
+      <if test="istransfer != null">
+        istransfer,
+      </if>
+      <if test="ratetemplate != null">
+        ratetemplate,
+      </if>
+      <if test="iselecontract != null">
+        iselecontract,
+      </if>
+      <if test="effectivetime != null">
+        effectivetime,
+      </if>
+      <if test="formaltime != null">
+        formaltime,
+      </if>
+      <if test="contraaudistatus != null">
+        contraaudistatus,
+      </if>
+      <if test="contratype != null">
+        contratype,
+      </if>
+      <if test="cpmode != null">
+        cpmode,
+      </if>
+      <if test="agentcompanycode != null">
+        agent_company_code,
+      </if>
+      <if test="refundrule != null">
+        refund_rule,
+      </if>
+      <if test="auditeffect != null">
+        audit_effect,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="cpid != null">
+        #{cpid,jdbcType=INTEGER},
+      </if>
+      <if test="contbegtime != null">
+        #{contbegtime,jdbcType=CHAR},
+      </if>
+      <if test="contendtime != null">
+        #{contendtime,jdbcType=CHAR},
+      </if>
+      <if test="isautorene != null">
+        #{isautorene,jdbcType=CHAR},
+      </if>
+      <if test="departid != null">
+        #{departid,jdbcType=CHAR},
+      </if>
+      <if test="workerid != null">
+        #{workerid,jdbcType=CHAR},
+      </if>
+      <if test="servtype != null">
+        #{servtype,jdbcType=CHAR},
+      </if>
+      <if test="balacyctype != null">
+        #{balacyctype,jdbcType=CHAR},
+      </if>
+      <if test="balacyctypetime != null">
+        #{balacyctypetime,jdbcType=DATE},
+      </if>
+      <if test="balacyctypevalue != null">
+        #{balacyctypevalue,jdbcType=INTEGER},
+      </if>
+      <if test="balacyctyptime != null">
+        #{balacyctyptime,jdbcType=DATE},
+      </if>
+      <if test="balacyctypvalue != null">
+        #{balacyctypvalue,jdbcType=INTEGER},
+      </if>
+      <if test="lowpaymoney != null">
+        #{lowpaymoney,jdbcType=DOUBLE},
+      </if>
+      <if test="feecontr != null">
+        #{feecontr,jdbcType=CHAR},
+      </if>
+      <if test="freebegtime != null">
+        #{freebegtime,jdbcType=CHAR},
+      </if>
+      <if test="freeendtime != null">
+        #{freeendtime,jdbcType=CHAR},
+      </if>
+      <if test="recdate != null">
+        #{recdate,jdbcType=DATE},
+      </if>
+      <if test="upddate != null">
+        #{upddate,jdbcType=DATE},
+      </if>
+      <if test="montranflow != null">
+        #{montranflow,jdbcType=DOUBLE},
+      </if>
+      <if test="transfercpid != null">
+        #{transfercpid,jdbcType=INTEGER},
+      </if>
+      <if test="transfercpname != null">
+        #{transfercpname,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertime != null">
+        #{transfertime,jdbcType=CHAR},
+      </if>
+      <if test="transfernote != null">
+        #{transfernote,jdbcType=VARCHAR},
+      </if>
+      <if test="istransfer != null">
+        #{istransfer,jdbcType=INTEGER},
+      </if>
+      <if test="ratetemplate != null">
+        #{ratetemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="iselecontract != null">
+        #{iselecontract,jdbcType=INTEGER},
+      </if>
+      <if test="effectivetime != null">
+        #{effectivetime,jdbcType=CHAR},
+      </if>
+      <if test="formaltime != null">
+        #{formaltime,jdbcType=CHAR},
+      </if>
+      <if test="contraaudistatus != null">
+        #{contraaudistatus,jdbcType=INTEGER},
+      </if>
+      <if test="contratype != null">
+        #{contratype,jdbcType=INTEGER},
+      </if>
+      <if test="cpmode != null">
+        #{cpmode,jdbcType=VARCHAR},
+      </if>
+      <if test="agentcompanycode != null">
+        #{agentcompanycode,jdbcType=VARCHAR},
+      </if>
+      <if test="refundrule != null">
+        #{refundrule,jdbcType=INTEGER},
+      </if>
+      <if test="auditeffect != null">
+        #{auditeffect,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.iapppay.consumer.dto.dsdto.DsCpContract">
+    update ds_cp_contract
+    <set>
+      <if test="contbegtime != null">
+        contbegtime = #{contbegtime,jdbcType=CHAR},
+      </if>
+      <if test="contendtime != null">
+        contendtime = #{contendtime,jdbcType=CHAR},
+      </if>
+      <if test="isautorene != null">
+        isautorene = #{isautorene,jdbcType=CHAR},
+      </if>
+      <if test="departid != null">
+        departid = #{departid,jdbcType=CHAR},
+      </if>
+      <if test="workerid != null">
+        workerid = #{workerid,jdbcType=CHAR},
+      </if>
+      <if test="servtype != null">
+        servtype = #{servtype,jdbcType=CHAR},
+      </if>
+      <if test="balacyctype != null">
+        balacyctype = #{balacyctype,jdbcType=CHAR},
+      </if>
+      <if test="balacyctypetime != null">
+        balacyctype_time = #{balacyctypetime,jdbcType=DATE},
+      </if>
+      <if test="balacyctypevalue != null">
+        balacyctype_value = #{balacyctypevalue,jdbcType=INTEGER},
+      </if>
+      <if test="balacyctyptime != null">
+        balacyctyp_time = #{balacyctyptime,jdbcType=DATE},
+      </if>
+      <if test="balacyctypvalue != null">
+        balacyctyp_value = #{balacyctypvalue,jdbcType=INTEGER},
+      </if>
+      <if test="lowpaymoney != null">
+        lowpaymoney = #{lowpaymoney,jdbcType=DOUBLE},
+      </if>
+      <if test="feecontr != null">
+        feecontr = #{feecontr,jdbcType=CHAR},
+      </if>
+      <if test="freebegtime != null">
+        freebegtime = #{freebegtime,jdbcType=CHAR},
+      </if>
+      <if test="freeendtime != null">
+        freeendtime = #{freeendtime,jdbcType=CHAR},
+      </if>
+      <if test="recdate != null">
+        recdate = #{recdate,jdbcType=DATE},
+      </if>
+      <if test="upddate != null">
+        upddate = #{upddate,jdbcType=DATE},
+      </if>
+      <if test="montranflow != null">
+        montranflow = #{montranflow,jdbcType=DOUBLE},
+      </if>
+      <if test="transfercpid != null">
+        transfercpid = #{transfercpid,jdbcType=INTEGER},
+      </if>
+      <if test="transfercpname != null">
+        transfercpname = #{transfercpname,jdbcType=VARCHAR},
+      </if>
+      <if test="transfertime != null">
+        transfertime = #{transfertime,jdbcType=CHAR},
+      </if>
+      <if test="transfernote != null">
+        transfernote = #{transfernote,jdbcType=VARCHAR},
+      </if>
+      <if test="istransfer != null">
+        istransfer = #{istransfer,jdbcType=INTEGER},
+      </if>
+      <if test="ratetemplate != null">
+        ratetemplate = #{ratetemplate,jdbcType=VARCHAR},
+      </if>
+      <if test="iselecontract != null">
+        iselecontract = #{iselecontract,jdbcType=INTEGER},
+      </if>
+      <if test="effectivetime != null">
+        effectivetime = #{effectivetime,jdbcType=CHAR},
+      </if>
+      <if test="formaltime != null">
+        formaltime = #{formaltime,jdbcType=CHAR},
+      </if>
+      <if test="contraaudistatus != null">
+        contraaudistatus = #{contraaudistatus,jdbcType=INTEGER},
+      </if>
+      <if test="contratype != null">
+        contratype = #{contratype,jdbcType=INTEGER},
+      </if>
+      <if test="cpmode != null">
+        cpmode = #{cpmode,jdbcType=VARCHAR},
+      </if>
+      <if test="agentcompanycode != null">
+        agent_company_code = #{agentcompanycode,jdbcType=VARCHAR},
+      </if>
+      <if test="refundrule != null">
+        refund_rule = #{refundrule,jdbcType=INTEGER},
+      </if>
+      <if test="auditeffect != null">
+        audit_effect = #{auditeffect,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.iapppay.consumer.dto.dsdto.DsCpContract">
+    update ds_cp_contract
+    set contbegtime = #{contbegtime,jdbcType=CHAR},
+      contendtime = #{contendtime,jdbcType=CHAR},
+      isautorene = #{isautorene,jdbcType=CHAR},
+      departid = #{departid,jdbcType=CHAR},
+      workerid = #{workerid,jdbcType=CHAR},
+      servtype = #{servtype,jdbcType=CHAR},
+      balacyctype = #{balacyctype,jdbcType=CHAR},
+      balacyctype_time = #{balacyctypetime,jdbcType=DATE},
+      balacyctype_value = #{balacyctypevalue,jdbcType=INTEGER},
+      balacyctyp_time = #{balacyctyptime,jdbcType=DATE},
+      balacyctyp_value = #{balacyctypvalue,jdbcType=INTEGER},
+      lowpaymoney = #{lowpaymoney,jdbcType=DOUBLE},
+      feecontr = #{feecontr,jdbcType=CHAR},
+      freebegtime = #{freebegtime,jdbcType=CHAR},
+      freeendtime = #{freeendtime,jdbcType=CHAR},
+      recdate = #{recdate,jdbcType=DATE},
+      upddate = #{upddate,jdbcType=DATE},
+      montranflow = #{montranflow,jdbcType=DOUBLE},
+      transfercpid = #{transfercpid,jdbcType=INTEGER},
+      transfercpname = #{transfercpname,jdbcType=VARCHAR},
+      transfertime = #{transfertime,jdbcType=CHAR},
+      transfernote = #{transfernote,jdbcType=VARCHAR},
+      istransfer = #{istransfer,jdbcType=INTEGER},
+      ratetemplate = #{ratetemplate,jdbcType=VARCHAR},
+      iselecontract = #{iselecontract,jdbcType=INTEGER},
+      effectivetime = #{effectivetime,jdbcType=CHAR},
+      formaltime = #{formaltime,jdbcType=CHAR},
+      contraaudistatus = #{contraaudistatus,jdbcType=INTEGER},
+      contratype = #{contratype,jdbcType=INTEGER},
+      cpmode = #{cpmode,jdbcType=VARCHAR},
+      agent_company_code = #{agentcompanycode,jdbcType=VARCHAR},
+      refund_rule = #{refundrule,jdbcType=INTEGER},
+      audit_effect = #{auditeffect,jdbcType=INTEGER}
+    where cpid = #{cpid,jdbcType=INTEGER}
+  </update>
+</mapper>
