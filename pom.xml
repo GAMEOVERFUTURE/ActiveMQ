@@ -16,7 +16,7 @@
 	    <lombok.version>1.16.10</lombok.version>
 		<fastjson.vesrion>1.2.35</fastjson.vesrion>
 		<junit.version>4.12</junit.version>
-		<mybatis.version>3.4.5</mybatis.version>
+		<mybatis.version>3.5.6</mybatis.version>
 		<logback.version>1.2.3</logback.version>
 		<activemq.core.version>5.7.0</activemq.core.version>
 		<activemq.pool.version>5.9.0</activemq.pool.version>
