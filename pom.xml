@@ -12,7 +12,7 @@
 
 	<properties>
 	    <spring.version>4.3.8.RELEASE</spring.version>
-	    <fastjson.version>1.2.30</fastjson.version>
+	    <fastjson.version>1.2.83</fastjson.version>
 	    <lombok.version>1.16.10</lombok.version>
 		<fastjson.vesrion>1.2.35</fastjson.vesrion>
 		<junit.version>4.12</junit.version>
